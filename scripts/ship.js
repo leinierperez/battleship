@@ -8,7 +8,12 @@ const ship = (name, length) => {
 
   const getShipArray = () => shipArray;
 
-  return { getShipArray, name, length };
+  const hit = (hitLocation) => {
+    if (hitLocation >= 0 && hitLocation < length) shipArray[hitLocation] = 1;
+    else return 'Invalid Location';
+  };
+
+  return { getShipArray, name, length, hit };
 };
 
 export default ship;
