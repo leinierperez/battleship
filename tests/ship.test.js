@@ -21,3 +21,19 @@ test('should return error message if its an invalid position on the ship', () =>
   const newShip = ship('Carrier', 5);
   expect(newShip.hit(5)).toBe('Invalid Location');
 });
+
+test('should return true if all the ships location have been hit', () => {
+  const newShip = ship('Destroyer', 3);
+  newShip.hit(0);
+  newShip.hit(1);
+  newShip.hit(2);
+  expect(newShip.isSunk()).toBe(true);
+});
+
+test('should return false if all the ships location have not been hit', () => {
+  const newShip = ship('Carrier', 5);
+  newShip.hit(0);
+  newShip.hit(1);
+  newShip.hit(4);
+  expect(newShip.isSunk()).toBe(false);
+});
