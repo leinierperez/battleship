@@ -13,7 +13,9 @@ const ship = (name, length) => {
     else return 'Invalid Location';
   };
 
-  return { getShipArray, name, length, hit };
+  const isSunk = () => shipArray.every((location) => location === 1);
+
+  return { getShipArray, name, length, hit, isSunk };
 };
 
 export default ship;
