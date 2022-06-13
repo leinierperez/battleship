@@ -37,3 +37,9 @@ test('should return false if all the ships location have not been hit', () => {
   newShip.hit(4);
   expect(newShip.isSunk()).toBe(false);
 });
+
+test('should return false if all the ships location have not been hit', () => {
+  const newShip = ship('Carrier', 5);
+  newShip.hit(0);
+  expect(newShip.hit(0)).toBe('Location Already Hit');
+});

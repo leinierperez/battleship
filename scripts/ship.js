@@ -9,6 +9,7 @@ const ship = (name, length) => {
   const getShipArray = () => shipArray;
 
   const hit = (hitLocation) => {
+    if (shipArray[hitLocation] === 1) return 'Location Already Hit';
     if (hitLocation >= 0 && hitLocation < length) shipArray[hitLocation] = 1;
     else return 'Invalid Location';
   };
