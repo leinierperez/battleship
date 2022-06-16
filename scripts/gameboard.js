@@ -11,14 +11,14 @@ const gameboard = () => {
       if (orientation === 'horizontal' && y + shipLength < board[0].length) {
         const newShip = ship(shipName, shipLength);
         for (let i = 0; i < newShip.length; i++) {
-          board[x][i + y] = newShip.name;
-          ships[newShip.name] = { ship: newShip, shipIndex: i };
+          board[x][i + y] = { shipName: newShip.name, shipIndex: i };
+          ships[newShip.name] = newShip;
         }
       } else if (orientation === 'vertical' && x + shipLength < board.length) {
         const newShip = ship(shipName, shipLength);
         for (let i = 0; i < newShip.length; i++) {
-          board[i + x][y] = newShip.name;
-          ships[newShip.name] = { ship: newShip, shipIndex: i };
+          board[i + x][y] = { shipName: newShip.name, shipIndex: i };
+          ships[newShip.name] = newShip;
         }
       }
     }
