@@ -2,6 +2,7 @@ import ship from '../scripts/ship.js';
 
 const gameboard = () => {
   const board = new Array(10).fill(null).map(() => new Array(10).fill(null));
+  const ships = {};
 
   const getBoard = () => board;
 
@@ -10,12 +11,14 @@ const gameboard = () => {
       if (orientation === 'horizontal' && y + shipLength < board[0].length) {
         const newShip = ship(shipName, shipLength);
         for (let i = 0; i < newShip.length; i++) {
-          board[x][i + y] = newShip;
+          board[x][i + y] = newShip.name;
+          ships[newShip.name] = { ship: newShip, shipIndex: i };
         }
       } else if (orientation === 'vertical' && x + shipLength < board.length) {
         const newShip = ship(shipName, shipLength);
         for (let i = 0; i < newShip.length; i++) {
-          board[i + x][y] = newShip;
+          board[i + x][y] = newShip.name;
+          ships[newShip.name] = { ship: newShip, shipIndex: i };
         }
       }
     }
