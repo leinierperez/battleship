@@ -28,8 +28,8 @@ const gameboard = () => {
 
   const shipFits = (x, y, shipLength) => {
     if (
-      x > 0 &&
-      y > 0 &&
+      x >= 0 &&
+      y >= 0 &&
       y + shipLength < board[0].length &&
       x + shipLength < board.length
     ) {
