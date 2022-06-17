@@ -40,3 +40,22 @@ test('should not place a ship on the gameboard if the ships intersect', () => {
   expect(newGameboard.isShipAtLocation(4, 5)).toBe(false);
   expect(newGameboard.isShipAtLocation(3, 1)).toBe(false);
 });
+
+test('should return true if the attack invoked the ships hit function it hit a ship', () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical');
+  expect(newGameboard.receiveAttack(4, 2)).toBe(true);
+});
+
+test(`should return 'Location Already Hit' if the ship was already attacked at that location`, () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical');
+  newGameboard.receiveAttack(4, 2);
+  expect(newGameboard.receiveAttack(4, 2)).toBe('Location Already Hit');
+});
+
+test('should put a miss on the board if the attack did not hit a ship', () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(5, 2, 'Battleship', 4, 'vertical');
+  expect(newGameboard.receiveAttack(4, 2)).toBe('miss');
+});

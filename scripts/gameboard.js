@@ -60,7 +60,18 @@ const gameboard = () => {
     else return true;
   };
 
-  return { getBoard, placeShip, isShipAtLocation };
+  const receiveAttack = (x, y) => {
+    if (isShipAtLocation(x, y) && !ships[board[x][y].shipName].isSunk()) {
+      const { shipName, shipIndex } = board[x][y];
+      const ship = ships[shipName];
+      return ship.hit(shipIndex);
+    } else if (isShipAtLocation(x, y) === false) {
+      board[x][y] = 'miss';
+      return 'miss';
+    }
+  };
+
+  return { getBoard, placeShip, isShipAtLocation, receiveAttack };
 };
 
 export default gameboard;
