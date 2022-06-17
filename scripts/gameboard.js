@@ -7,20 +7,51 @@ const gameboard = () => {
   const getBoard = () => board;
 
   const placeShip = (x, y, shipName, shipLength, orientation) => {
-    if (x > 0 && y > 0 && isShipAtLocation(x, y) === false) {
-      if (orientation === 'horizontal' && y + shipLength < board[0].length) {
-        const newShip = ship(shipName, shipLength);
+    if (
+      shipFits(x, y, shipLength) &&
+      !isShipIntersecting(x, y, shipLength, orientation)
+    ) {
+      const newShip = ship(shipName, shipLength);
+      if (orientation === 'horizontal') {
         for (let i = 0; i < newShip.length; i++) {
           board[x][i + y] = { shipName: newShip.name, shipIndex: i };
           ships[newShip.name] = newShip;
         }
-      } else if (orientation === 'vertical' && x + shipLength < board.length) {
-        const newShip = ship(shipName, shipLength);
+      } else if (orientation === 'vertical') {
         for (let i = 0; i < newShip.length; i++) {
           board[i + x][y] = { shipName: newShip.name, shipIndex: i };
           ships[newShip.name] = newShip;
         }
       }
+    }
+  };
+
+  const shipFits = (x, y, shipLength) => {
+    if (
+      x > 0 &&
+      y > 0 &&
+      y + shipLength < board[0].length &&
+      x + shipLength < board.length
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const isShipIntersecting = (x, y, shipLength, orientation) => {
+    if (!isShipAtLocation(x, y)) {
+      if (orientation === 'horizontal') {
+        for (let i = 0; i < shipLength; i++) {
+          if (isShipAtLocation(x, i + y)) return true;
+        }
+      } else if (orientation === 'vertical') {
+        for (let i = 0; i < shipLength; i++) {
+          if (isShipAtLocation(i + x, y)) return true;
+        }
+      }
+      return false;
+    } else {
+      return true;
     }
   };
 

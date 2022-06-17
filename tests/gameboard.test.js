@@ -31,3 +31,12 @@ test('should not place a ship on the gameboard if the ship does not fit', () => 
   newGameboard.placeShip(8, 1, 'Battleship', 4, 'vertical');
   expect(newGameboard.isShipAtLocation(8, 1)).toBe(false);
 });
+
+test('should not place a ship on the gameboard if the ships intersect', () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(4, 1, 'Battleship', 4, 'horizontal');
+  newGameboard.placeShip(4, 4, 'Battleship', 4, 'horizontal');
+  newGameboard.placeShip(3, 1, 'Battleship', 4, 'vertical');
+  expect(newGameboard.isShipAtLocation(4, 5)).toBe(false);
+  expect(newGameboard.isShipAtLocation(3, 1)).toBe(false);
+});
