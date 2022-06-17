@@ -10,8 +10,10 @@ const ship = (name, length) => {
 
   const hit = (hitLocation) => {
     if (shipArray[hitLocation] === 1) return 'Location Already Hit';
-    if (hitLocation >= 0 && hitLocation < length) shipArray[hitLocation] = 1;
-    else return 'Invalid Location';
+    if (hitLocation >= 0 && hitLocation < length) {
+      shipArray[hitLocation] = 1;
+      return true;
+    } else return 'Invalid Location';
   };
 
   const isSunk = () => shipArray.every((location) => location === 1);
