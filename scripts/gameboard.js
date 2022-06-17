@@ -71,7 +71,21 @@ const gameboard = () => {
     }
   };
 
-  return { getBoard, placeShip, isShipAtLocation, receiveAttack };
+  const isAllShipsSunk = () => {
+    let shipsSunk = [];
+    for (const ship in ships) {
+      shipsSunk.push(ships[ship].isSunk());
+    }
+    return shipsSunk.every((val) => val === true);
+  };
+
+  return {
+    getBoard,
+    placeShip,
+    isShipAtLocation,
+    receiveAttack,
+    isAllShipsSunk,
+  };
 };
 
 export default gameboard;

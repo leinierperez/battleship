@@ -59,3 +59,40 @@ test('should put a miss on the board if the attack did not hit a ship', () => {
   newGameboard.placeShip(5, 2, 'Battleship', 4, 'vertical');
   expect(newGameboard.receiveAttack(4, 2)).toBe('miss');
 });
+
+test('should return true if all the ships on the board have sunk', () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(1, 0, 'Carrier', 5, 'vertical');
+  newGameboard.placeShip(1, 1, 'Battleship', 4, 'vertical');
+  newGameboard.placeShip(1, 2, 'Destroyer', 3, 'vertical');
+  newGameboard.placeShip(1, 3, 'Submarine', 3, 'vertical');
+  newGameboard.placeShip(1, 4, 'Patrol Boat', 2, 'vertical');
+
+  for (let i = 1; i <= 5; i++) {
+    newGameboard.receiveAttack(i, 0);
+    newGameboard.receiveAttack(i, 1);
+    newGameboard.receiveAttack(i, 2);
+    newGameboard.receiveAttack(i, 3);
+    newGameboard.receiveAttack(i, 4);
+  }
+
+  expect(newGameboard.isAllShipsSunk()).toBe(true);
+});
+
+test('should return false if all the ships on the board have not sunk', () => {
+  const newGameboard = gameboard();
+  newGameboard.placeShip(1, 0, 'Carrier', 5, 'vertical');
+  newGameboard.placeShip(1, 1, 'Battleship', 4, 'vertical');
+  newGameboard.placeShip(1, 2, 'Destroyer', 3, 'vertical');
+  newGameboard.placeShip(1, 3, 'Submarine', 3, 'vertical');
+  newGameboard.placeShip(1, 4, 'Patrol Boat', 2, 'vertical');
+
+  for (let i = 1; i <= 5; i++) {
+    newGameboard.receiveAttack(i, 0);
+    newGameboard.receiveAttack(i, 1);
+    newGameboard.receiveAttack(i, 3);
+    newGameboard.receiveAttack(i, 4);
+  }
+
+  expect(newGameboard.isAllShipsSunk()).toBe(false);
+});
