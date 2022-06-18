@@ -17,9 +17,11 @@ test('should mark given position as hit on the ship', () => {
   expect(newShip.getShipArray()).toEqual([0, 0, 0, 1, 0]);
 });
 
-test('should return error message if its an invalid position on the ship', () => {
+test('should return false if its an unccessful hit', () => {
   const newShip = ship('Carrier', 5);
-  expect(newShip.hit(5)).toBe('Invalid Location');
+  expect(newShip.hit(5)).toBe(false);
+  newShip.hit(0);
+  expect(newShip.hit(0)).toBe(false);
 });
 
 test('should return true if all the ships location have been hit', () => {
@@ -36,10 +38,4 @@ test('should return false if all the ships location have not been hit', () => {
   newShip.hit(1);
   newShip.hit(4);
   expect(newShip.isSunk()).toBe(false);
-});
-
-test('should return false if all the ships location have not been hit', () => {
-  const newShip = ship('Carrier', 5);
-  newShip.hit(0);
-  expect(newShip.hit(0)).toBe('Location Already Hit');
 });

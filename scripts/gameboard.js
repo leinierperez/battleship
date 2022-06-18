@@ -56,7 +56,7 @@ const gameboard = () => {
   };
 
   const isShipAtLocation = (x, y) => {
-    if (board[x][y] === null) return false;
+    if (board[x][y] === null || board[x][y] === 'miss') return false;
     else return true;
   };
 
@@ -65,10 +65,11 @@ const gameboard = () => {
       const { shipName, shipIndex } = board[x][y];
       const ship = ships[shipName];
       return ship.hit(shipIndex);
-    } else if (isShipAtLocation(x, y) === false) {
+    } else if (isShipAtLocation(x, y) === false && board[x][y] !== 'miss') {
       board[x][y] = 'miss';
-      return 'miss';
+      return true;
     }
+    return false;
   };
 
   const isAllShipsSunk = () => {

@@ -47,17 +47,18 @@ test('should return true if the attack invoked the ships hit function it hit a s
   expect(newGameboard.receiveAttack(4, 2)).toBe(true);
 });
 
-test(`should return 'Location Already Hit' if the ship was already attacked at that location`, () => {
+test(`should return false if the ship was already attacked at that location`, () => {
   const newGameboard = gameboard();
   newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical');
   newGameboard.receiveAttack(4, 2);
-  expect(newGameboard.receiveAttack(4, 2)).toBe('Location Already Hit');
+  expect(newGameboard.receiveAttack(4, 2)).toBe(false);
 });
 
 test('should put a miss on the board if the attack did not hit a ship', () => {
   const newGameboard = gameboard();
   newGameboard.placeShip(5, 2, 'Battleship', 4, 'vertical');
-  expect(newGameboard.receiveAttack(4, 2)).toBe('miss');
+  newGameboard.receiveAttack(4, 2);
+  expect(newGameboard.getBoard()[4][2]).toBe('miss');
 });
 
 test('should return true if all the ships on the board have sunk', () => {
