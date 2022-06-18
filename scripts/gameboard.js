@@ -23,7 +23,9 @@ const gameboard = () => {
           ships[newShip.name] = newShip;
         }
       }
+      return true;
     }
+    return false;
   };
 
   const shipFits = (x, y, shipLength) => {
