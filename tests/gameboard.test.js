@@ -14,13 +14,15 @@ test('should place a ship on the gameboard horizontally', () => {
 
 test('should place a ship on the gameboard vertically', () => {
   const newGameboard = gameboard();
-  newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical');
-  expect(newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical')).toBe(false);
+  expect(newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical')).toBe(true);
 });
 
 test('should not place a ship on the gameboard if the ship does not fit', () => {
   const newGameboard = gameboard();
   expect(newGameboard.placeShip(8, 1, 'Battleship', 4, 'vertical')).toBe(false);
+  expect(newGameboard.placeShip(2, 8, 'Battleship', 4, 'horizontal')).toBe(
+    false
+  );
 });
 
 test('should not place a ship on the gameboard if the ships intersect', () => {
