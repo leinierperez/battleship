@@ -41,20 +41,16 @@ const gameboard = () => {
   };
 
   const isShipIntersecting = (x, y, shipLength, orientation) => {
-    if (!isShipAtLocation(x, y)) {
-      if (orientation === 'horizontal') {
-        for (let i = 0; i < shipLength; i++) {
-          if (isShipAtLocation(x, i + y)) return true;
-        }
-      } else if (orientation === 'vertical') {
-        for (let i = 0; i < shipLength; i++) {
-          if (isShipAtLocation(i + x, y)) return true;
-        }
+    if (orientation === 'horizontal') {
+      for (let i = 0; i < shipLength; i++) {
+        if (isShipAtLocation(x, i + y)) return true;
       }
-      return false;
-    } else {
-      return true;
+    } else if (orientation === 'vertical') {
+      for (let i = 0; i < shipLength; i++) {
+        if (isShipAtLocation(i + x, y)) return true;
+      }
     }
+    return false;
   };
 
   const isShipAtLocation = (x, y) => {
