@@ -8,8 +8,9 @@ const gameboard = () => {
 
   const placeShip = (x, y, shipName, shipLength, orientation) => {
     if (
-      shipFits(x, y, shipLength) &&
-      !isShipIntersecting(x, y, shipLength, orientation)
+      shipFits(x, y, shipLength, orientation) &&
+      !isShipIntersecting(x, y, shipLength, orientation) &&
+      !isShipSurrounding(x, y, shipLength, orientation)
     ) {
       const newShip = ship(shipName, shipLength);
       if (orientation === 'horizontal') {
@@ -28,14 +29,12 @@ const gameboard = () => {
     return false;
   };
 
-  const shipFits = (x, y, shipLength) => {
-    if (
-      x >= 0 &&
-      y >= 0 &&
-      y + shipLength < board[0].length &&
-      x + shipLength < board.length
-    ) {
-      return true;
+  const shipFits = (x, y, shipLength, orientation) => {
+    if (x >= 0 && y >= 0) {
+      if (orientation === 'horizontal' && y + shipLength < board.length)
+        return true;
+      else if (orientation === 'vertical' && x + shipLength < board.length)
+        return true;
     }
     return false;
   };
@@ -76,6 +75,27 @@ const gameboard = () => {
       shipsSunk.push(ships[ship].isSunk());
     }
     return shipsSunk.every((val) => val === true);
+  };
+
+  const isShipSurrounding = (x, y, shipLength, orientation) => {
+    if (orientation === 'horizontal') {
+      for (let i = y - 1; i <= y + shipLength; ++i) {
+        if (i < 0 || i > 9) continue;
+        for (let j = x - 1; j <= x + 1; j++) {
+          if (j < 0 || j > 9) continue;
+          if (isShipAtLocation(j, i)) return true;
+        }
+      }
+    } else if (orientation === 'vertical') {
+      for (let i = y - 1; i <= y + 1; ++i) {
+        if (i < 0 || i > 9) continue;
+        for (let j = x - 1; j <= x + shipLength; j++) {
+          if (j < 0 || j > 9) continue;
+          if (isShipAtLocation(j, i)) return true;
+        }
+      }
+    }
+    return false;
   };
 
   return {

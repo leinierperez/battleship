@@ -88,3 +88,31 @@ test('should return false if all the ships on the board have not sunk', () => {
 
   expect(newGameboard.isAllShipsSunk()).toBe(false);
 });
+
+test('should not place a vertical ship on the gameboard if there is a surrounding ship', () => {
+  const newGameboard = gameboard();
+  expect(newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical')).toBe(true);
+  expect(newGameboard.placeShip(4, 3, 'Battleship', 4, 'vertical')).toBe(false);
+});
+
+test('should not place a horizontal ship on the gameboard if there is a surrounding ship', () => {
+  const newGameboard = gameboard();
+  expect(newGameboard.placeShip(2, 1, 'Battleship', 4, 'horizontal')).toBe(
+    true
+  );
+  expect(newGameboard.placeShip(3, 1, 'Battleship', 4, 'horizontal')).toBe(
+    false
+  );
+});
+
+test('should place a ship on the gameboard even if it is touching edges of the board', () => {
+  const newGameboard = gameboard();
+  expect(newGameboard.placeShip(0, 0, 'Battleship', 4, 'vertical')).toBe(true);
+  expect(newGameboard.placeShip(0, 9, 'Battleship', 4, 'vertical')).toBe(true);
+  expect(newGameboard.placeShip(9, 0, 'Battleship', 4, 'horizontal')).toBe(
+    true
+  );
+  expect(newGameboard.placeShip(6, 5, 'Battleship', 4, 'horizontal')).toBe(
+    true
+  );
+});
