@@ -2,7 +2,7 @@ import gameboard from '../scripts/gameboard.js';
 
 const player = (name, isAI) => {
   const board = gameboard();
-  const { placeShip } = board;
+  const { placeShip, getBoard } = board;
 
   const attackPlayer = (x, y, playerToAttack) => {
     if (!isAI) {
@@ -24,8 +24,6 @@ const player = (name, isAI) => {
   };
 
   const getName = () => name;
-
-  const getBoard = () => board;
 
   return { attackPlayer, placeShip, getRandomBoardCoords, getName, getBoard };
 };
