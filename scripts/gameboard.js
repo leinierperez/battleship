@@ -15,12 +15,20 @@ const gameboard = () => {
       const newShip = ship(shipName, shipLength);
       if (orientation === 'horizontal') {
         for (let i = 0; i < newShip.length; i++) {
-          board[x][i + y] = { shipName: newShip.name, shipIndex: i };
+          board[x][i + y] = {
+            cellHit: false,
+            shipName: newShip.name,
+            shipIndex: i,
+          };
           ships[newShip.name] = newShip;
         }
       } else if (orientation === 'vertical') {
         for (let i = 0; i < newShip.length; i++) {
-          board[i + x][y] = { shipName: newShip.name, shipIndex: i };
+          board[i + x][y] = {
+            cellHit: false,
+            shipName: newShip.name,
+            shipIndex: i,
+          };
           ships[newShip.name] = newShip;
         }
       }
@@ -61,7 +69,11 @@ const gameboard = () => {
     if (isShipAtLocation(x, y) && !ships[board[x][y].shipName].isSunk()) {
       const { shipName, shipIndex } = board[x][y];
       const ship = ships[shipName];
-      return ship.hit(shipIndex);
+      if (ship.hit(shipIndex)) {
+        board[x][y].cellHit = true;
+        return true;
+      }
+      return false;
     } else if (isShipAtLocation(x, y) === false && board[x][y] !== 'miss') {
       board[x][y] = 'miss';
       return true;
