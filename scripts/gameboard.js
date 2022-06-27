@@ -39,9 +39,9 @@ const gameboard = () => {
 
   const shipFits = (x, y, shipLength, orientation) => {
     if (x >= 0 && y >= 0) {
-      if (orientation === 'horizontal' && y + shipLength < board.length)
+      if (orientation === 'horizontal' && y + shipLength <= board.length)
         return true;
-      else if (orientation === 'vertical' && x + shipLength < board.length)
+      else if (orientation === 'vertical' && x + shipLength <= board.length)
         return true;
     }
     return false;

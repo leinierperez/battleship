@@ -14,7 +14,7 @@ test('should place a ship on the gameboard horizontally', () => {
 
 test('should place a ship on the gameboard vertically', () => {
   const newGameboard = gameboard();
-  expect(newGameboard.placeShip(4, 2, 'Battleship', 4, 'vertical')).toBe(true);
+  expect(newGameboard.placeShip(5, 1, 'Battleship', 5, 'vertical')).toBe(true);
 });
 
 test('should not place a ship on the gameboard if the ship does not fit', () => {
