@@ -1,8 +1,8 @@
 import ship from '../scripts/ship.js';
 
 const gameboard = () => {
-  const board = new Array(10).fill(null).map(() => new Array(10).fill(null));
-  const ships = {};
+  let board = new Array(10).fill(null).map(() => new Array(10).fill(null));
+  let ships = {};
 
   const getBoard = () => board;
 
@@ -110,12 +110,18 @@ const gameboard = () => {
     return false;
   };
 
+  const resetBoard = () => {
+    board = new Array(10).fill(null).map(() => new Array(10).fill(null));
+    ships = {};
+  };
+
   return {
     getBoard,
     placeShip,
     isShipAtLocation,
     receiveAttack,
     isAllShipsSunk,
+    resetBoard,
   };
 };
 

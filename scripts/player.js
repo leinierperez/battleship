@@ -1,17 +1,17 @@
 import gameboard from '../scripts/gameboard.js';
 
 const player = (name, isAI) => {
-  const board = gameboard();
-  const { placeShip, getBoard } = board;
+  const { placeShip, getBoard, receiveAttack, isAllShipsSunk, resetBoard } =
+    gameboard();
 
   const attackPlayer = (x, y, playerToAttack) => {
     if (!isAI) {
-      return playerToAttack.getBoard().receiveAttack(x, y);
+      return playerToAttack.receiveAttack(x, y);
     } else if (isAI) {
       let result;
       do {
         const [x1, y1] = getRandomBoardCoords();
-        result = playerToAttack.getBoard().receiveAttack(x1, y1);
+        result = playerToAttack.receiveAttack(x1, y1);
       } while (result === false);
       return result;
     }
@@ -25,7 +25,15 @@ const player = (name, isAI) => {
 
   const getName = () => name;
 
-  return { attackPlayer, placeShip, getRandomBoardCoords, getName, getBoard };
+  return {
+    attackPlayer,
+    placeShip,
+    getName,
+    getBoard,
+    receiveAttack,
+    isAllShipsSunk,
+    resetBoard,
+  };
 };
 
 export default player;
