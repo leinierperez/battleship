@@ -4,7 +4,7 @@ const gameboard = () => {
   let board = new Array(10).fill(null).map(() => new Array(10).fill(null));
   let ships = {};
 
-  const getBoard = () => board;
+  const getBoard = () => [...board];
 
   const placeShip = (x, y, shipName, shipLength, orientation) => {
     if (

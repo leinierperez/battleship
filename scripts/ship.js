@@ -6,7 +6,7 @@
 const ship = (name, length) => {
   const shipArray = new Array(length).fill(0);
 
-  const getShipArray = () => shipArray;
+  const getShipArray = () => [...shipArray];
 
   const hit = (hitLocation) => {
     if (
