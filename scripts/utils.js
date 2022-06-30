@@ -7,7 +7,7 @@ const utils = () => {
     { name: 'Patrol Boat', length: 2 },
   ];
 
-  const getDefaultShips = () => defaultShips;
+  const getDefaultShips = () => [...defaultShips];
 
   const randomInArray = (array) => {
     return array[Math.floor(Math.random() * array.length)];
