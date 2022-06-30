@@ -4,9 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
     <title>Battleship</title>
   </head>
-  <body></body>
-
+  <body>
+    <header>
+      <h1>Battleship</h1>
+    </header>
+    <main class="boards">
+      <div class="board-container">
+        <p class="board-name">Your Fleet</p>
+        <div class="board player-board"></div>
+      </div>
+      <div class="middle-message-container">
+        <p class="message">Place your ships</p>
+        <p class="message">
+          Orientation: <button id="orientation-btn">Vertical</button>
+        </p>
+      </div>
+      <div class="gameover">
+        <p class="win-message"></p>
+        <button id="play-again-btn">Play Again</button>
+      </div>
+      <div class="board-container">
+        <p class="board-name">Opponent</p>
+        <div class="board computer-board disabled-board"></div>
+      </div>
+    </main>
+  </body>
   <script src="./scripts/index.js" type="module"></script>
 </html>

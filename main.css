@@ -1,0 +1,267 @@
+/* CREDIT: https://piccalil.li/blog/a-modern-css-reset/ */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  color: white;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background: rgb(68, 182, 242);
+  background: radial-gradient(
+    circle,
+    rgba(68, 182, 242, 1) 0%,
+    rgba(47, 127, 208, 1) 60%
+  );
+  max-width: 1500px;
+  margin: auto;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 1rem;
+}
+
+header {
+  align-self: center;
+}
+
+.boards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.board-name {
+  font-size: 2em;
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  border: 1px solid #000;
+  width: 450px;
+  height: 450px;
+}
+
+.board-cell {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.disabled-board::after {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ship-cell {
+  background: rgb(150, 148, 148);
+}
+
+.hovered-cell {
+  background-color: rgb(52, 255, 52);
+}
+
+.surrounding-cell {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.35),
+    rgba(1, 11, 32, 0.35) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+
+.invalid-placement {
+  background-color: rgb(222, 44, 44);
+}
+
+.attack {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.attack-successful {
+  background-color: #f00;
+}
+
+.attack-missed {
+  background-color: rgb(17, 110, 255);
+}
+
+.middle-message-container,
+.gameover {
+  border: 1.5px solid #fff;
+  border-radius: 0.5rem;
+  font-size: 1.3em;
+  padding: 1rem;
+  gap: 0.5em;
+}
+
+.middle-message-container {
+  font-size: 1.3em;
+  padding: 1rem;
+  text-align: center;
+}
+
+.gameover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#orientation-btn,
+#play-again-btn {
+  all: unset;
+  cursor: pointer;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgb(62, 99, 159) 0 -1.5px 0 inset;
+  border-radius: 0.3rem;
+  padding: 0.3rem 1rem;
+}
+
+.gameover {
+  display: none;
+}
+
+@media screen and (max-width: 1370px) {
+  .board {
+    width: 350px;
+    height: 350px;
+  }
+
+  .attack {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .board {
+    width: 300px;
+    height: 300px;
+  }
+
+  .middle-message-container,
+  .gameover {
+    font-size: 1.1em;
+  }
+
+  .attack {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+@media screen and (max-width: 1070px) {
+  .boards {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .middle-message-container {
+    font-size: 1.1em;
+  }
+
+  .gameover {
+    font-size: 1.3em;
+  }
+
+  #orientation-btn {
+    padding: 0.1rem 0.3rem;
+  }
+
+  #play-again-btn {
+    padding: 0.2rem 1rem;
+  }
+}
