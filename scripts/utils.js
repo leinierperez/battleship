@@ -9,7 +9,11 @@ const utils = () => {
 
   const getDefaultShips = () => defaultShips;
 
-  return { getDefaultShips };
+  const randomInArray = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+
+  return { getDefaultShips, randomInArray };
 };
 
 export default utils;
