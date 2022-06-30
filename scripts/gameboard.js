@@ -110,18 +110,12 @@ const gameboard = () => {
     return false;
   };
 
-  const resetBoard = () => {
-    board = new Array(10).fill(null).map(() => new Array(10).fill(null));
-    ships = {};
-  };
-
   return {
     getBoard,
     placeShip,
     isShipAtLocation,
     receiveAttack,
     isAllShipsSunk,
-    resetBoard,
   };
 };
 
