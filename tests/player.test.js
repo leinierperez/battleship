@@ -1,25 +1,26 @@
-import player from '../scripts/player.js';
+import humanPlayer from '../scripts/humanPlayer.js';
+import computerPlayer from '../scripts/computerPlayer.js';
 
 test('should return true if the human player attack was successful', () => {
-  const humanPlayer = player('Player 1', false);
-  const computerPlayer = player('AI', true);
-  computerPlayer.placeShip(1, 0, 'Carrier', 5, 'vertical');
-  expect(humanPlayer.attackPlayer(1, 0, computerPlayer)).toBe(true);
-  expect(humanPlayer.attackPlayer(1, 1, computerPlayer)).toBe(true);
+  const player1 = humanPlayer('Player 1');
+  const player2 = computerPlayer('AI');
+  player2.placeShip(1, 0, 'Carrier', 5, 'vertical');
+  expect(player1.attackPlayer(1, 0, player2)).toBe(true);
+  expect(player1.attackPlayer(1, 1, player2)).toBe(true);
 });
 
 test('should return false if the human player tried attacking the same location', () => {
-  const humanPlayer = player('Player 1', false);
-  const computerPlayer = player('AI', true);
-  computerPlayer.placeShip(1, 0, 'Carrier', 5, 'vertical');
-  humanPlayer.attackPlayer(1, 1, computerPlayer);
-  expect(humanPlayer.attackPlayer(1, 1, computerPlayer)).toBe(false);
+  const player1 = humanPlayer('Player 1');
+  const player2 = computerPlayer('AI');
+  player2.placeShip(1, 0, 'Carrier', 5, 'vertical');
+  player1.attackPlayer(1, 1, player2);
+  expect(player1.attackPlayer(1, 1, player2)).toBe(false);
 });
 
 test('should return true if the computer player attack was successful', () => {
-  const humanPlayer = player('Player 1', false);
-  const computerPlayer = player('AI', true);
-  humanPlayer.placeShip(1, 0, 'Carrier', 5, 'vertical');
-  expect(computerPlayer.attackPlayer(null, null, humanPlayer)).toBe(true);
-  expect(computerPlayer.attackPlayer(null, null, humanPlayer)).toBe(true);
+  const player1 = humanPlayer('Player 1');
+  const player2 = computerPlayer('AI');
+  player1.placeShip(1, 0, 'Carrier', 5, 'vertical');
+  expect(player2.attackPlayer(player1)).toBe(true);
+  expect(player2.attackPlayer(player1)).toBe(true);
 });
