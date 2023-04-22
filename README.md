@@ -8,5 +8,7 @@
 - [View Live](https://leinierperez.github.io/battleship/)
 
 
-https://user-images.githubusercontent.com/60529713/233766629-747e2c74-bdf8-459f-9633-8e2ec6279062.mp4
+https://user-images.githubusercontent.com/60529713/233766731-c07c7581-0547-46fd-b7b0-b8c7de45a409.mp4
+
+
 
